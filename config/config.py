@@ -4,13 +4,10 @@ _config = {
     },
     "table_path": {
         "FEATURE_TABLE": "./config/features.csv",
+        "TRANSFORMATION_TABLE": "./config/transformation.csv"
     },
     "fhir_server": {
-        "FHIR_SERVER_URL_": "http://localhost:8090/fhir",
         "FHIR_SERVER_URL": "http://ming-desktop.ddns.net:8192/fhir",
-    },
-    "bulk_server": {
-        "BULK_SERVER_URL": "http://localhost:8082/fhir"
     },
 }
 

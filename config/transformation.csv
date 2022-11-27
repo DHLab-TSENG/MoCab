@@ -11,6 +11,8 @@ qcsi,o2_flow_rate,category,5=gt|4&le|6,3
 diabetes,glucose,numeric,,2
 diabetes,diastolic_blood_pressure,numeric,,3
 diabetes,insulin,numeric,,5
+diabetes,height,numeric,,
+diabetes,weight,numeric,,
 diabetes,bmi,formula,[weight]/([height]/100)/([height]/100),6
 diabetes,pregnancies,numeric,,1
 diabetes,skinthickness,numeric,,4
