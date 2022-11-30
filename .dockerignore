@@ -1,0 +1,4 @@
+*.md
+**/.git
+**/.idea
+**/venv_intelmac
