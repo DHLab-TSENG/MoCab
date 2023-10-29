@@ -24,4 +24,3 @@ class ThresholdNoneError(ValueError):
 
 class RegexUnrecognizedException(Exception):
     pass
-

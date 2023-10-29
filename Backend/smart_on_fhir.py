@@ -28,6 +28,7 @@ def smart_api_with_id(api):
 
 @smart_app.route("/launch", methods=['GET'])
 def smart_launch():
+    # TODO: Change redirect_uri
     global smart_clientObj
     settings = {
         'app_id': 'mocab_app',

@@ -60,6 +60,7 @@ def model_evaluating(model_name: str,
         route = fhir_resources_route.get_route_dict(key)
         value = None
 
+        # TODO: Not dynamic.
         if route['resource_type'] == "Patient":
             if patient_resource is None:
                 return False

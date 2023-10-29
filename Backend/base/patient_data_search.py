@@ -11,14 +11,11 @@ def model_feature_search_with_patient_id(patient_id: str,
                                          data_alive_time: str = None) -> dict:
     """
     This function will return the result of model feature search with patient id. Different from smart search, this
-    function only returns SINGLE result in dictionary type based on the search_type config in feature table.
-
-    2023/06/09 update: function is integrated with smart_model_feature_search_with_patient_id.
-    :param patient_id: The patient id.
-    :param table: The configuration of feature table.
-    :param default_time: Deprecated. Set the time of data. The default is None, which is the current time.
-    :param data_alive_time: Deprecated. The feature access time. If it is 24, it means take to features within 24 hours.
-                            The default is None, which means it is not set.
+    function will return the single result in dictionary type with the search_type defined in feature table.
+    :param patient_id:
+    :param table:
+    :param default_time: Not yet implemented
+    :param data_alive_time:
     :return: return date and value in dictionary type
     e.g.: {'date': "2020-12-13", 'value': 87}
     """
@@ -67,9 +64,8 @@ def smart_model_feature_search_with_patient_id(patient_id: str,
 def extract_data_in_data_sets(data_sets, table, default_time=datetime.datetime.now()) -> dict:
     """
     This function will extract the data in data_sets and return a dictionary
-    :param data_sets: Data collected from FHIR server.
-    :param table: the feature configuration set in feature table.
-    :param default_time: Deprecated. Set the time of data. The default is None, which is the current time.
+    :param data_sets:
+    :param default_time:
     :return: All features value and date in dictionary type
     e.g.:{
         "diastolic blood pressure": {
@@ -82,6 +78,7 @@ def extract_data_in_data_sets(data_sets, table, default_time=datetime.datetime.n
     origin_data = data_sets.copy()
 
     for sync_fhir_resource in data_sets['resource']:
+        # TODO: 其實也可以改這個動作，畢竟真的很多餘，但有點怕大改
         origin_data['resource'] = sync_fhir_resource
 
         temp_date = get_resource_datetime(origin_data, table, default_time)
@@ -96,7 +93,7 @@ def extract_data_in_data_sets(data_sets, table, default_time=datetime.datetime.n
 if __name__ == '__main__':
     from base.object_store import feature_table
 
-    # Note that this test if for the Bulk Server
+    # Note that this test should be processed with the Bulk Server
     features__table = feature_table
     patient__id = "07458CF801637945E1276A0B154C7718607BFD93"
     feature__table = features__table.get_model_feature_dict('SPC')

@@ -1,11 +1,12 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img alt="Vue logo" src="./assets/mocab_icon.png">
   <!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
   <div id="mainDiv">
     <div id="divChart">
       <div>
-        <label for="since-time">Since Datetime: </label>
+        <label for="since-time" style="font-size: 25px">Since Datetime: </label>
         <input
+            style="font-size: 25px"
             id="setMinDateTime"
             v-model="minDate"
             name="since-time"
@@ -33,13 +34,11 @@
     >
       <h2
           v-if="!gettingModelScoreStatus"
-          style="width: 50%;text-align: left"
       >
         Model Score: {{getCurrentModelObject.score}}
       </h2>
       <h2
         v-else-if="gettingModelScoreStatus"
-        style="width: 75%;text-align: left"
       >
         Getting new model score...
       </h2>
@@ -62,8 +61,8 @@
 
 <script>
 import ModelChart from "@/components/ModelChart";
-import {featureTable} from "@/baseModel/feature";
 import {getData} from "@/baseModel/patientDataSearch";
+import axios from "axios";
 
 export default {
   name: 'App',
@@ -89,7 +88,8 @@ export default {
       return this.$store.state.modelFeatureArray
     },
     getCurrentModelObject() {
-      let obj = null
+      let obj = {}
+      obj.score = 0
       for(const arr of this.$store.state.modelFeatureArray){
         if(arr.name === this.type)
           obj = arr
@@ -114,29 +114,52 @@ export default {
     let modelFeatureArray = [] // Stores all feature
     let featureCollectObject
 
-    console.log(featureTable)
-    for (const [key, value] of Object.entries(featureTable)) {
+    let model_list = await axios({
+      method: 'get',
+      baseURL: this.$store.state.base,
+      url: `/exist_model`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+        .then((result) => {
+          return result.data['model']
+        })
+        .catch(error => console.log(error))
+
+    let uri = window.location.search.substring(1);
+    let params = new URLSearchParams(uri);
+    if (params.has('id')) {
+      this.$store.commit('changePatientId', params.get('id'))
+    } else {
+      console.log("patient_id is not in the parameter, using default patient 'test-03121002' instead. ")
+    }
+
+
+    for (const available_model of model_list) {
       featureCollectObject = {}
-      featureCollectObject.name = key
-      featureCollectObject.resources = await getData('test-03121002', value)
-      featureCollectObject.score = null
+      featureCollectObject.name = available_model
+      featureCollectObject.resources = await getData(this.$store.state.patient_id, available_model)
+      featureCollectObject.score = 0
       modelFeatureArray.push(featureCollectObject)
     }
     console.log(modelFeatureArray)
-
     this.$store.commit('updateFeatureArray', modelFeatureArray)
-
-    // TODO: 接下來，打API來取得各個Model的結果
-    // 這邊可以用actions來做，畢竟之後的很多事情都會透過actions來執行
   },
 }
 </script>
 
 <style>
+body{
+  overflow: hidden;
+}
 img {
-  height: 50px;
-  width: 50px;
+  height: 7vh;
   margin-right: 10px
+}
+
+h2 {
+  font-size: 25px;
+  text-align: left;
 }
 
 #app {
@@ -157,15 +180,15 @@ img {
 
 #divChart {
   height: 85vh;
-  width: 60vw;
+  width: 70vw;
+  margin: 10px;
   /*overflow: overlay;*/
 }
 
 #divModelSelect{
   display: flex;
   flex-direction: column;
-  width: 40vw;
-
+  width: 30vw;
 }
 
 #model-select {

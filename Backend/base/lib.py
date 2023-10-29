@@ -140,6 +140,8 @@ class BaseVariable:
 
 
 class Operation:
+
+    # TODO: 原先的variable可以為None, 但為什麼？
     def __init__(self, variable: BaseVariable, threshold, prefix: str = "eq"):
         # Handle nan situation
         if threshold == "nan":
@@ -158,6 +160,7 @@ class Operation:
 
     def validate(self):
         try:
+            # TODO: 要想一下get_value 如果為nan時會不會有什麼Error
             thres = self.threshold
             if issubclass(type(thres), BaseVariable):
                 thres = self.threshold.get_value()
@@ -165,6 +168,7 @@ class Operation:
             var = self.variable.get_value()
 
             if type(thres) == list:
+                # TODO: 這裡有沒有可能是要用all? 極大機率要改架構
                 return any(
                     [getattr(operator, self.prefix)(transform_to_correct_type(var), transform_to_correct_type(t)) for t in thres]
                 )
@@ -177,6 +181,8 @@ class Operation:
 
 
 class FilterOperation:
+
+    # TODO: 原先的variable可以為None, 但為什麼？
     def __init__(self, threshold, prefix: str = "eq", type: str = "value"):
         # Doesn't support nan threshold.
         # Reason: nan is not a valid filter while training. (Or maybe is?)

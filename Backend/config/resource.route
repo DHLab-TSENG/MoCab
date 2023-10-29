@@ -3,7 +3,6 @@ condition_datetime=Condition.recordedDate
 observation_datetime=Observation.effectiveDateTime
 observation_period=Observation.effectivePeriod.start
 observation_quantity=Observation.valueQuantity.value
-observation_string=Observation.valueString
 procedure_datetime=Procedure.performedDateTime
 procedure_period=Procedure.performedPeriod.start
 blood_pressure_diastolic=Observation.component.{code:coding.{code:"8462-4"}}.valueQuantity.value

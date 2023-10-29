@@ -3,19 +3,23 @@ import axios from "axios";
 
 const nowDate = new Date()
 
-const base = 'https://4cbd-140-115-87-242.ngrok.io/'
-
 export const store = createStore({
     state () {
         return {
             modelFeatureArray: [],
-            modelScoreGettingStatus: false, // while data changed, parameter will turn to true
+            modelScoreGettingStatus: false, // while data changes, parameter will turn to true
             dateChanged: false,
             minDate: nowDate.setFullYear(nowDate.getFullYear() - 7),
             maxDate: new Date(),
+            base: 'http://127.0.0.1:5050',
+            base_prefix: 'smart',
+            patient_id: "test-03121002",
         }
     },
     mutations: {
+        changePatientId(state, id){
+          state.patient_id = id
+        },
         updateFeatureArray(state, modelArray) {
             state.modelFeatureArray = modelArray
         },
@@ -40,7 +44,7 @@ export const store = createStore({
              */
             const arrayIndex = valueObj.index
             const featureName = valueObj.featureName
-            state.modelFeatureArray[arrayIndex].resources[featureName].take = valueObj.featureValue
+            state.modelFeatureArray[arrayIndex].resources[featureName].take = valueObj.featureValue == 'true' ? true : valueObj.featureValue == 'false' ? false : valueObj.featureValue
         },
         gettingModelScore(state, statusBool){
             state.modelScoreGettingStatus = statusBool
@@ -56,7 +60,7 @@ export const store = createStore({
             })
             axios({
                 method: 'post',
-                baseURL: base,
+                baseURL: this.state.base,
                 url: `/${modelFeatureObj.name}/change`,
                 data: featureObj,
                 'Content-Type': 'application/json',
@@ -65,7 +69,12 @@ export const store = createStore({
                 .then((result) => {
                     let obj = {}
                     obj.index = arrayIndex
-                    obj.score = result.data['predict_value']
+                    let score = Number(result.data['predict_value']).toFixed(3)
+                    // if the decimal are all in 0, parse it into integer
+                    if (score % 1 === 0) {
+                        score = parseInt(score)
+                    }
+                    obj.score = score
                     commit('changeModelScore', obj)
                 })
                 .catch(error => console.log(error))

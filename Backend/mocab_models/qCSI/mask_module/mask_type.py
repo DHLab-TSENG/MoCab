@@ -47,6 +47,8 @@ class ConcreteMaskType(MaskType):
         else:
             response = self._regex_search_method(treatment_medication_text)
 
+            # TODO: 應該要用一個contains來先判斷treatment_medication_text是否有change等特殊連貫字詞
+            # TODO: 特殊連貫字詞應該有一個value set儲存各種字詞
             # 判斷treatment text是否有連貫特殊字詞，如"->", "change", reverse的目的是要優先讓split後面的字串被判斷
             treatment_medication_text_after_split = treatment_medication_text.split("->")
             treatment_medication_text_after_split.reverse()

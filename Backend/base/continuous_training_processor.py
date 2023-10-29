@@ -86,6 +86,8 @@ def allocate_feature_resources(resources, code_dict) -> dict:
 def combine_training_and_predicting_feature_table(model_name: str):
     """
     Combine the training and predicting feature table.
+    :param training_feature_table:
+    :param feature_table:
     :return:
     """
     # Combine the feature table of training and predicting.

@@ -1,9 +1,9 @@
 import threading
 import time
+
 import pandas as pd
 import random
 import string
-
 from datetime import datetime
 from config import configObject as conf
 from collections import OrderedDict
@@ -195,6 +195,8 @@ def training_process(model_name):
                                                     y_value_and_datetime_of_patients_after_filter,
                                                     model_name, y_data=True)
 
+
+
     transformed_training_data = merge_transformed_data(transformed_x_data_of_patients,
                                                        transformed_y_data_of_patients)
 
@@ -214,9 +216,8 @@ def training_process(model_name):
         return_dict = {
             "model": model_name,
             "last_training_time": str(datetime.now()),
-            "last_training_data_time": str(
-                transform_to_correct_type(training_status_table.get_last_training_data_filter_operation(
-                    model_name).threshold, "date")),
+            "last_training_data_time": str(transform_to_correct_type(training_status_table.get_last_training_data_filter_operation(
+                model_name).threshold, "date")),
             "numbers_of_patients": numbers_of_patients,
             "old_model_evaluate": 0,
             "new_model_evaluate": 0,
@@ -306,3 +307,4 @@ if __name__ == "__main__":
     print("starting...")
     print(training_process("SPC"))
     print("ending...")
+    pass

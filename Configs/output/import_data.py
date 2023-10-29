@@ -8,22 +8,12 @@ import json
 def main(url, path):
     folders = os.listdir(path)
     # Exclude IDE folders
-    try:
-        folders.remove(".vscode")
-    except ValueError:
-        pass
-    try:
-        folders.remove(".idea")
-    except ValueError:
-        pass
+    folders.remove(".vscode")
+    folders.remove(".idea")
     # folders.remove(".git")
     # Move Test Data folder to the end
-    try:
-        folders.remove("Test Data")
-        folders.append("Test Data")
-    except ValueError:
-        pass
-
+    folders.remove("Test Data")
+    folders.append("Test Data")
     for folder_name in folders:
         if not os.path.isdir(os.path.join(path, folder_name)):
             continue
@@ -94,7 +84,7 @@ def create_resource(
 
 if __name__ == "__main__":
     url = input("請輸入FHIR Server base URL: ")
-    path = input("請輸入檔案夾路徑: ")
+    path = os.getcwd()
     main(url, path)
 
     print("Done!")

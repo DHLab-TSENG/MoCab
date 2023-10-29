@@ -249,9 +249,7 @@ class ResourcesInterface(ABC):
         :param table: the configuration of the feature that has been defined in the feature table
         :param default_time: The time we default, usually are the time of the prediction (Such as now), but may would be
             used for training.
-        :param data_alive_time: Deprecated. The feature time we want.
-                                If it is 24, it means take to features within 24 hours.
-                                The default is None, which means it is not set.
+        :param data_alive_time: The time we want to get the data. If the data is not alive, we will not get the data.
         :return: Dictionary, inside the dictionary are the resources packed into a list and the type of resource.
             resource: list, type: str.capitalize()
         """
@@ -392,11 +390,9 @@ class Observation(ResourcesInterface, GetValueAndDatetimeInterface):
         route_list = []
         if route is None:
             route_list.append(fhir_resources_route.get_route("observation_quantity"))
-            route_list.append(fhir_resources_route.get_route("observation_string"))
         else:
             for item in route:
                 route_list.append(fhir_resources_route.get_route(item))
-
         for item in route_list:
             if get_by_path(resource, item) is not None:
                 return get_by_path(resource, item)
@@ -489,6 +485,7 @@ class Condition(ResourcesInterface, GetValueAndDatetimeInterface):
         }
 
         resources = CLIENT.resources('Condition')
+        # FIXME: 等等，date__ge呢?
         search = resources.search(
             **params
         ).sort('recorded-date')
@@ -611,7 +608,7 @@ def get_patient_resources_data_set(patient_id,
     :param patient_id: patient's id
     :param table: feature's table,
                   dict type with {'code', 'data_alive_time', 'type_of_data', 'default_value', 'search_type'}
-    :param default_time: Deprecated. Set the time of data. The default is None, which is the current time.
+    :param default_time: the time of the default, for model training used. DEFAULT=datetime.now()
     :param data_alive_time: the time range, start from the default_time.
                             e.g. if the data_alive_time is 2 years, and the default_time is not, the server will search
                                  the data that is between now and two years ago

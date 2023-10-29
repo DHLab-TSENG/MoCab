@@ -26,5 +26,6 @@ def transformer(model_feature_table, data: dict, model_name):
         # 所有Variable
         if not has_value:
             return_list.append(None)
+            # TODO: add maybe an Nonetype of Nan to the list if there's no value in the variable
 
     return return_list

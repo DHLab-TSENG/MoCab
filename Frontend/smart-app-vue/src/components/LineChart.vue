@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!getChangeStatus">
+  <div style="width: 32.92%;" v-if="!getChangeStatus">
     <div class="lineChartClass">
       <Line
           :chart-data="chartData"
@@ -7,35 +7,55 @@
       />
     </div>
     <div class="chartLabelClass">
-      <label>{{ title + ": " }}</label>
-      <input type="number" v-model.lazy="take">
+      <label style="font-size: 22px">{{ title.replaceAll("_", " ") }}</label>
+      <div
+          class="divInputClass"
+          v-if="featureObj[title]['type_of_data'] === 'observation' || featureObj[title]['type_of_data'] === 'patient'"
+      >
+        <input
+            type="number"
+            v-model.lazy="take"
+        >
+        <span style="margin-left:3px;font-size: 12px">{{ featureObj[title]['unit'] }}</span>
+      </div>
+      <div
+          class="divInputClass"
+          v-if="featureObj[title]['type_of_data'] === 'condition'"
+      >
+        <!--   Keep spaces for condition resources in search_type == "count"     -->
+        <label style="padding-top: 3px"><input type="radio" v-model="take" :value="true">True</label>
+        <label style="padding-top: 3px"><input type="radio" v-model="take" :value="false">False</label>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {Line} from 'vue-chartjs'
-import 'chartjs-adapter-moment'
+import {Line} from 'vue-chartjs';
+import {featureTable} from "@/baseModel/feature";
+import 'chartjs-adapter-moment';
 import {Chart as ChartJS, Title, Tooltip, Legend, LineElement, PointElement, LinearScale, TimeScale} from 'chart.js'
 
-ChartJS.defaults.font.size = 13;
+ChartJS.defaults.font.size = 10;
 ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, TimeScale)
 export default {
   name: "LineChart",
   components: {Line},
   props: {
+    modelName: String,
     title: String,
     chartLabel: Array,
     chartPoint: Array,
   },
   data() {
     return {
+      featureObj: featureTable[this.modelName],
       minDataSlice: 2,
       chartData: {
         labels: this.chartLabel.slice(this.minDataSlice),
         datasets: [
           {
-            label: this.title,
+            label: this.title.replaceAll("_", " "),
             fill: false,
             tension: 0.2,
             borderWidth: 3,
@@ -48,6 +68,7 @@ export default {
         ]
       },
       chartOptions: {
+        spanGaps: true,
         aspectRatio: 1.25,
         responsive: true,
         animation: false,
@@ -58,7 +79,7 @@ export default {
           legend: {
             labels: {
               font: {
-                size: 14
+                size: 25
               }
             }
           },
@@ -68,7 +89,12 @@ export default {
           bodyAlign: 'center'
         },
         onClick: (e) => {
-          this.take = e.chart.tooltip.dataPoints[0].raw
+          try{
+            this.take = e.chart.tooltip.dataPoints[0].raw
+          }
+          catch (e){
+            this.take += 0
+          }
         },
         scales: {
           x: {
@@ -102,7 +128,6 @@ export default {
     })
 
     this.minDataSlice = count
-    console.log(this.minDataSlice)
   },
   mounted() {
     // eslint-disable-next-line vue/no-mutating-props
@@ -139,14 +164,36 @@ export default {
 </script>
 
 <style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   display: none;
+  -webkit-appearance: none;
+}
+input {
+  margin-top: 5px;
+  height: 15px;
+}
+input[type=number] {
+  /*text-align: center;*/
+  width: 4vw;
+}
+
 .lineChartClass {
-  width: 40vw;
   position: relative;
   margin: 15px
 }
 
 .chartLabelClass {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom-style: dashed;
+}
+
+.divInputClass {
+  height: 3.5vh
 }
 
 </style>

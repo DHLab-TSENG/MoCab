@@ -4,7 +4,7 @@ import shutil
 
 import pandas as pd
 
-from mocab_models import *  # This is a trick to import all models in mocab_models folder. DO NOT DELETE THIS LINE.
+from mocab_models import *
 from base.model_input_transformer import transformer
 from base.object_store import feature_table
 from base.object_store import model_feature_table
@@ -29,9 +29,9 @@ def verify_data(patient_data_dict, api):
 
 def return_model_result(patient_data_dict, api):
     """
-        Function return_model_result will perform predict on the model and return the result of the model.
-        2022/10/10 update: The data will be translated to the model preferred category based on the ModelFeature Table.
-                           before passing data to the model.
+        Function return_model_result會對 model執行 predict的動作，回傳 model的結果
+        2022-10-10 新增一個新的動作：在丟入Model之前，會先將資料根據ModelFeature Table轉譯成model prefer的category
+        TODO: 把return_model_result獨立成一個新的檔案，需要解決的技術難點: globals()[api]
     """
 
     # transfer patient data into model preferred input
@@ -99,6 +99,8 @@ def choose_model(api, choosed_model):
 
 
 def import_model():
+    # TODO: Need to figure out what actions does this function done, and optimize it.
+    # get a handle on the module
     mdl = importlib.import_module('mocab_models')
 
     # is there an __all__?  if so respect it
