@@ -1,0 +1,2 @@
+models,filter,interval,null_value_strategy,test_size,validate_method
+SPC,(date)lt|[seq_2]&(date)ge|[seq_1],0001-00-00T00:00:00,(drop)gt|3&(median),0.2,auroc

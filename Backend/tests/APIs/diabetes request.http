@@ -1,0 +1,5 @@
+### Request GET diabetes api with patient's id
+GET http://localhost:5000/pima_diabetes?id=test-03121002
+
+### Request GET diabetes api with patient's id in SMART Search
+GET http://localhost:5000/smart/pima_diabetes?id=test-03121002

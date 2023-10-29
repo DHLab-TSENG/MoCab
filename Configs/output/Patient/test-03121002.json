@@ -1,0 +1,23 @@
+{
+  "resourceType": "Patient",
+  "id": "test-03121002",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table class=\"hapiPropertyTable\"><tbody><tr><td>Date of birth</td><td><span>18 June 1925</span></td></tr></tbody></table></div>"
+  },
+  "gender": "male",
+  "birthDate": "1997-10-02",
+  "name": [
+    {
+      "use": "official",
+      "family": "Kuo",
+      "given": ["Ming"],
+      "prefix": ["Mr."]
+    }
+  ],
+  "managingOrganization": {
+    "id": "1",
+    "reference": "Organization/h1",
+    "type": "Organization"
+  }
+}

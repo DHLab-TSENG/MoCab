@@ -1,0 +1,7 @@
+model,feature,type,formulate,index
+SPC,seq_1,numeric,,
+SPC,seq_2,numeric,,
+SPC,lung_cancer,numeric,,
+SPC,class,category,1=[seq_1]|[lung_cancer]&[seq_2]|true,1
+SPC,class,category,0=[seq_1]|[lung_cancer]&[seq_2]|false,1
+SPC,class,category,none=[default],1

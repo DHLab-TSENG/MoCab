@@ -1,2 +1,4 @@
 *.pyc
+*.xml
+node_modules
 __pycache__

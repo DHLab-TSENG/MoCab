@@ -1,4 +1,7 @@
 # MoCab
-
-Feature Table: [https://github.com/DHLab-TSENG/MoCab/blob/main/config/features.csv](https://github.com/DHLab-TSENG/MoCab/blob/main/config/features.csv) <br>
-Transformation Table: [https://github.com/DHLab-TSENG/MoCab/blob/main/config/transformation.csv](https://github.com/DHLab-TSENG/MoCab/blob/main/config/transformation.csv)
+---
+MoCab, also named as Model Cabinet, is the model 
+integration system that supports models to be integrated
+with Hospital Information System(HIS). \
+The system supports FHIR(Fast Health Interoperability Resources) Data Structure Standard 
+and SMART on FHIR, CDS Hooks Standard.

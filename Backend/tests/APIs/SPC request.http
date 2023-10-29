@@ -1,0 +1,2 @@
+### Start continuous training process with request GET SPC api
+GET http://localhost:5050/ct/SPC

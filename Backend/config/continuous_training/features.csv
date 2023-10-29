@@ -1,0 +1,10 @@
+model,feature,code,code_system,type_of_data,data_alive_time,default_value,search_type,value_route,datetime_route
+SPC,seq_1,01,https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/sequence-number-codesystem,condition,,,latest,encounter_id,
+SPC,seq_2,02,https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/sequence-number-codesystem,condition,,,latest,,
+SPC,lung_cancer,C339,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C340,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C341,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C342,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C343,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C348,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,
+SPC,lung_cancer,C349,http://hl7.org/fhir/sid/icd-10,condition,,,all,encounter_id,

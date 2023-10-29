@@ -1,0 +1,4 @@
+model,condition,info_range,warning_range,critical_range,smart_app_url
+pima_diabetes,gender=male&age=ge|20,lt|0.3,ge|0.3&lt|0.7,gt|0.7,
+qCSI,,le|4,gt|4&le|8,gt|8,
+NSTI,,lt|0.3,ge|0.3&lt|0.7,gt|0.7,

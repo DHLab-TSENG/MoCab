@@ -1,0 +1,32 @@
+### Send POST request with integer type of o2 flow rate value
+POST http://localhost:5000/cds-hooks/cds-services/MoCab-CDS-Service
+Content-Type: application/json
+
+{
+  "hookInstance": "39b1c392-0471-459d-ab98-cd3ac5cd54fc",
+  "hook": "patient-view",
+  "fhirServer": "http://ming-desktop.ddns.net:8192/fhir",
+  "context": {
+    "patientId": "test-03121002",
+    "userId": "Practitioner/COREPRACTITIONER1"
+  }
+}
+
+
+### Send POST request with integer type of o2 flow rate value
+POST http://localhost:5001/cds-services/MoCab-CDS-Service
+Content-Type: application/json
+
+{
+  "id": "MoCab-CDS-Service",
+  "hook": "patient-view",
+  "title": "Patient Greeter",
+  "fhirServer": "http://ming-desktop.ddns.net:8192/fhir",
+  "description": "The patient greeting service greets a patient!",
+  "hookUrl": "https://4d6d-111-250-187-213.jp.ngrok.io/cds-services/MoCab-CDS-Service",
+  "context": {
+    "patientId": "test-03121002",
+    "userId": "Practitioner/COREPRACTITIONER1"
+  }
+}
+

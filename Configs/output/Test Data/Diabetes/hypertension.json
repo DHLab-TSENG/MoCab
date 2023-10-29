@@ -1,0 +1,21 @@
+{
+    "id": "hypertension-example",
+    "code":
+    {
+        "coding":
+        [
+            {
+                "code": "I10",
+                "system": "http://hl7.org/fhir/sid/icd-10"
+            }
+        ]
+    },
+    "recordedDate": "2016-03-17T00:00:00+08:00",
+    "subject":
+    {
+        "id": "test-03121002",
+        "reference": "Patient/test-03121002",
+        "type": "Patient"
+    },
+    "resourceType": "Condition"
+}

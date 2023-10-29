@@ -1,0 +1,29 @@
+### Request GET NSTI api with patient's id
+GET http://localhost:5000/NSTI?id=test-03121002
+
+### Request POST NSTI api with patient's data
+POST http://localhost:5000/NSTI/change
+Content-Type: application/json
+
+{
+  "sea": {
+    "date": "2016-12-24T00:00:00",
+    "value": true
+  },
+  "wbc": {
+    "date": "2016-12-24T00:00:00",
+    "value": 4400
+  },
+  "crp": {
+    "date": "2016-12-24T00:00:00",
+    "value": 0.5
+  },
+  "seg": {
+    "date": "2016-12-24T00:00:00",
+    "value": 50.7
+  },
+  "band": {
+    "date": "2016-12-24T00:00:00",
+    "value": 0
+  }
+}

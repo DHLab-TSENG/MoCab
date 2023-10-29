@@ -1,0 +1,46 @@
+
+### Send POST request with integer type of o2 flow rate value
+POST http://localhost:5000/qCSI/change
+Content-Type: application/json
+
+{
+  "respiratory_rate": {
+    "date": "2022-01-19T11:53",
+    "value": 25
+  },
+  "o2_flow_rate": {
+    "date": "2022-01-19T11:53",
+    "value": 3
+  },
+  "fio2": "",
+  "spo2": {
+    "date": "2022-01-19T11:53",
+    "value": 90
+  }
+}
+
+### Send POST request with string type of o2 flow rate value
+POST http://localhost:5000/qCSI/change
+Content-Type: application/json
+
+{
+  "respiratory_rate": {
+    "date": "2022-01-19T11:53",
+    "value": 18
+  },
+  "o2_flow_rate": {
+    "date": "2022-01-19T11:53",
+    "value": "oxygen therapy-nonrebreathing mask 100%"
+  },
+  "fio2": "",
+  "spo2": {
+    "date": "2022-01-19T11:53",
+    "value": 86
+  }
+}
+
+### Request GET qcsi api with patient's id
+GET http://localhost:5000/qCSI?id=test-03121002
+
+### Request GET qcsi api with patient's id in SMART
+GET http://localhost:5000/smart/qCSI?id=test-03121002
