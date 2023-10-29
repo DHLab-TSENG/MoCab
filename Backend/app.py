@@ -27,8 +27,8 @@ table = feature_table
 
 @mocab_app.route('/', methods=['GET'])
 def index():
-    return "Hello, World!<br/><br/>Please enter the patient ID you want to search after / in the address bar to get the results.<br/>Example: <a " \
-           f"href=\"/pima_diabetes?id=test-03121002\">{conf.get('base_urls').get('BACKEND_URL')}/pima_diabetes?id=test-03121002</a> "
+    return "Hello, World!<br/><br/>請在網址列的/後面輸入你要搜尋的病患id即可得出結果<br/>Example: <a " \
+           f"href=\"/pima_diabetes?id=test-03121002\">{conf.get('base_urls').get('BACKEND_URL')}/diabetes?id=test-03121002</a> "
 
 
 @mocab_app.route('/exist_model')
@@ -53,6 +53,7 @@ def api_with_id(api):
             }
         }
     """
+    # TODO: the hour_alive_time request value
     patient_id = request.values.get('id')
     if patient_id is None:
         abort(400, description="Please fill in patient's ID.")

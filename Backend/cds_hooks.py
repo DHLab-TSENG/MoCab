@@ -24,6 +24,7 @@ def model_evaluation(patient_id, encounter_id) -> list:
     encounter_resource = None
     model_list = []
 
+    # TODO: 之後改掉，取得Resources 的動作統一在search_sets 中執行
     patient_resource = fhir_client.resources("Patient").search(_id=patient_id).limit(1).get()
     if encounter_id != "":
         try:

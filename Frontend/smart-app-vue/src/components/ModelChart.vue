@@ -1,17 +1,18 @@
 <template>
   <!-- v-on:valueChange is a label from LineChart $emit   -->
-  <h1>{{ title }}</h1>
+  <h1 style="margin-bottom: 10px">{{ title.replaceAll("_", " ") }}</h1>
   <div
     class="lineChartSetsClass"
   >
     <LineChart
-        v-for="x in dataData.length"
-        :key="x"
-        :chart-label="dataLabel[x-1]"
-        :chart-point="dataData[x-1]"
-        :title="dataTitle[x-1]"
-        @takeChange="changedTake_Obj"
-    ></LineChart>
+          v-for="x in dataData.length"
+          :key="x"
+          :chart-label="dataLabel[x-1]"
+          :chart-point="dataData[x-1]"
+          :title="dataTitle[x-1]"
+          :model-name="title"
+          @takeChange="changedTake_Obj"
+      ></LineChart>
   </div>
 </template>
 
@@ -21,7 +22,7 @@ import LineChart from "@/components/LineChart";
 export default {
   name: "ModelChart",
   components: {
-    LineChart
+    LineChart,
   },
   props: {
     title: String,
@@ -57,6 +58,7 @@ export default {
       count++;
     }
 
+
     if (featureObj === undefined)
       return
 
@@ -84,10 +86,13 @@ p {
 }
 
 .lineChartSetsClass {
-  height: 70vh;
-  width: 100%;
-  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 78vh;
+  width: 60vw;
+  justify-content: space-around;
   overflow-y: scroll;
+
 }
 
 .lineChartSetsClass::-webkit-scrollbar-track {

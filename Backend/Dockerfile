@@ -1,4 +1,4 @@
-# Use the condaforge/miniforge3 base image for macOS ARM architecture
+# Use the condaforge/miniforge3 base image
 FROM condaforge/miniforge3:latest
 
 ENV PYTHONUNBUFFERED 1
@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . /app
 
 # Install project dependencies using Conda
-RUN pip install -r requirements.txt
+RUN pip install -r requirement.txt
 
 # Expose port if necessary (replace 8080 with your desired port)
 EXPOSE 5050

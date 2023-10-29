@@ -26,6 +26,7 @@ def predict(data: list, base_path, model_type="register") -> int:
         treatment_mining_result = \
             mask.mask_mart.treatment_mining(flow_rate_value)
         if treatment_mining_result is not None:
+            # TODO: Convert FiO2 to Flow rate
             if treatment_mining_result['unit_type'] != unit_type[0]:
                 data[2] = unit_conversion(treatment_mining_result)
             else:
@@ -46,6 +47,7 @@ def unit_conversion(treatment_mining_result: Dict) -> int or float:
     """
     converted_value = 0
     fio2_value = int(treatment_mining_result['value'])
+    # TODO: 補齊轉換的單位數值
     if treatment_mining_result['mask_name'] == mask_type[0]:
         converted_value = (fio2_value - 5) / 5
     elif treatment_mining_result['mask_name'] == mask_type[1]:

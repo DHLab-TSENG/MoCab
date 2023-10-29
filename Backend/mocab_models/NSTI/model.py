@@ -16,6 +16,7 @@ def predict(data: list, base_path, model_type="register"):
     """
     x = list()
     temp = data
+    # Fixme: 路徑問題，待解決
     loaded_model = joblib.load(f"{base_path}/{model_type}_model")
     x.append(temp)
     result = loaded_model.predict_proba(x)
