@@ -9,5 +9,6 @@ docker-compose*
 .git
 .gitignore
 .vscode
-.venv*
+venv
 .pytest_cache
+**/doc
