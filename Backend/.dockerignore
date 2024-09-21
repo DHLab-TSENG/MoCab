@@ -9,4 +9,5 @@ docker-compose*
 .git
 .gitignore
 .vscode
-.venv_intelmac
+.venv*
+.pytest_cache

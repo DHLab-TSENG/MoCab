@@ -101,19 +101,19 @@ def update_status(process_id, start_thread: MyThread):
         result = {"message": "Training process failed. Check the log for more details."}
     else:
         model_name = result.get("model")
+        process_status[model_name][process_id] = result
 
     """
-        What I thought is that we can use the process_id as the key to update the training status table.
+        We can use the process_id as the key to update the training status table.
         And the reason why I stored the result by process_id and model_name->process_id is for the performance.
         
         If we only use model_name->process_id as the key, we need to traverse each model_name to find the
-        corresponding process_id. But if we use process_id as the key, we can directly find the corresponding.
+        corresponding process_id. But if we use process_id as the key, we can find the result by model name directly.
     """
     # Update the training status table with process_id
     process_status[process_id] = result
 
-    # Update the training status table with model_name
-    process_status[model_name][process_id] = result
+
 
 
 @ct_app.route("/process/<process_id>", methods=['GET'])
