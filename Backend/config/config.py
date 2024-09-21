@@ -14,7 +14,7 @@ _config = {
         "BULK_SERVER_URL_LOCAL": "http://localhost:8888/fhir"
     },
     "base_urls": {
-        "BACKEND_URL": "http://localhost:5050",
+        "BACKEND_URL": "http://localhost:5000",
         "FRONTEND_URL": "http://localhost:8080",
         "cds_hooks_prefix": "/cds-hooks",
         "smart_prefix": "/smart",
@@ -23,7 +23,7 @@ _config = {
     "patient_id": "test-03121002",
     "flask_config": {
         "DEBUG": True,
-        "PORT": 5050,
+        "PORT": 5000,
     }
 }
 

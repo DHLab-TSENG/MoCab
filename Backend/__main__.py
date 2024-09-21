@@ -43,4 +43,4 @@ if __name__ == '__main__':
     CORS(mocab_app)
     port = conf.get("flask_config").get("PORT")
     debug = conf.get("flask_config").get("DEBUG")
-    mocab_app.run(port=port, debug=debug, use_reloader=False)
+    mocab_app.run(host='0.0.0.0', port=port, debug=debug, use_reloader=False)
